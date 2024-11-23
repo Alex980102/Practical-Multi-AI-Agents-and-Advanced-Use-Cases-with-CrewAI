@@ -1,0 +1,111 @@
+tasks:
+  - task_name: create_documentation_outline
+    description: >
+      Develop a structured outline for the platform documentation, including
+      main sections, subsections, and a brief description of each.
+    agent: documentation_planning_agent
+    expected_output: >
+      A detailed documentation outline with:
+      - Main sections
+      - Subsections
+      - Objectives for each section.
+
+  - task_name: prioritize_documentation_sections
+    description: >
+      Analyze the documentation outline and prioritize which sections
+      should be developed first based on importance and platform objectives.
+    agent: documentation_planning_agent
+    expected_output: >
+      A prioritized list of documentation sections with justifications
+      for their importance.
+
+  - task_name: gather_platform_requirements
+    description: >
+      Collect and organize the initial functional and non-functional
+      requirements for the platform, ensuring clarity and feasibility.
+    agent: requirements_analysis_agent
+    expected_output: >
+      A categorized list of requirements divided into:
+      - Functional requirements
+      - Non-functional requirements
+      Each requirement must include a rationale.
+
+  - task_name: analyze_requirement_dependencies
+    description: >
+      Evaluate the platform requirements to identify dependencies, risks,
+      and constraints. Highlight critical paths impacting the timeline.
+    agent: requirements_analysis_agent
+    expected_output: >
+      A dependency map of platform requirements, including:
+      - Identified dependencies
+      - Potential risks or constraints
+      - Critical paths.
+
+  - task_name: identify_system_sections
+    description: >
+      Define the core sections or modules of the platform, providing a
+      detailed description of each section's purpose and functionality.
+    agent: system_sections_agent
+    expected_output: >
+      A detailed list of system sections with:
+      - Names
+      - Roles and functionalities
+      - Integration points with other sections.
+
+  - task_name: create_sequence_diagram
+    description: >
+      Generate a sequence diagram in Mermaid syntax that visualizes the
+      interaction between platform modules or participants based on
+      specified workflows.
+    agent: sequence_diagram_creator
+    context: [identify_system_sections, analyze_requirement_dependencies]
+    expected_output: >
+      A Mermaid sequence diagram illustrating:
+      - Participant interactions
+      - Workflow steps
+      - Logical flow of processes.
+
+  - task_name: validate_mermaid_diagram
+    description: >
+      Validate the syntax of a provided Mermaid sequence diagram to ensure
+      it is free of errors and can be rendered correctly.
+    agent: sequence_diagram_creator
+    context: [create_sequence_diagram]
+    expected_output: >
+      A validation report indicating:
+      - Syntax correctness
+      - Suggested corrections for errors, if any.
+
+  - task_name: enhance_diagram_with_notes
+    description: >
+      Add notes and labels to an existing Mermaid sequence diagram to provide
+      additional context and improve readability.
+    agent: sequence_diagram_creator
+    context: [create_sequence_diagram]
+    expected_output: >
+      An updated Mermaid sequence diagram with:
+      - Notes placed appropriately
+      - Clear labels for critical points.
+
+  - task_name: generate_complex_sequence_diagram
+    description: >
+      Create a complex Mermaid sequence diagram that includes loops,
+      conditional paths (alt/else), and parallel actions.
+    agent: sequence_diagram_creator
+    expected_output: >
+      A detailed Mermaid sequence diagram with:
+      - Loops defined using "loop" blocks
+      - Conditional paths using "alt" and "else"
+      - Parallel actions using "par" blocks.
+
+  - task_name: consolidate_documentation_and_diagrams
+    description: >
+      Combine the documentation outline, requirements analysis, and
+      sequence diagrams into a cohesive and structured document.
+    agent: documentation_planning_agent
+    context: [create_documentation_outline, gather_platform_requirements, create_sequence_diagram]
+    expected_output: >
+      A consolidated document containing:
+      - Documentation outline
+      - Mapped requirements
+      - Relevant sequence diagrams.
